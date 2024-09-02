@@ -6,37 +6,39 @@ import Fade from 'react-reveal/Fade';
 import 'tachyons/css/tachyons.min.css';
 
 const Board = () => {
-  const initialSquares = Array(9).fill(null);
-  const [squares, setSquares] = useState(initialSquares);
-  const [isXNext, setIsXNext] = useState(true);
-  const winner = calculateWinner(squares);
-  const isDraw = !winner && squares.every(Boolean);
-  const status = winner
-    ? `Winner: ${winner}`
+  const initialSquares = Array(9).fill(null); // intial board 
+  const [squares, setSquares] = useState(initialSquares); // intial squares 
+  const [isXNext, setIsXNext] = useState(true); // next move 0 or X
+  const winner = calculateWinner(squares); // calculate result if winner or not (based on square matches)
+  const isDraw = !winner && squares.every(Boolean); // calculate if is draw or based on if every square is filled and winner is not found.
+  const status = winner 
+    ? `Winner: ${winner}` 
     : isDraw
     ? 'It\'s a Draw!'
-    : `Next player: ${isXNext ? 'X' : 'O'}`;
+    : `Next player: ${isXNext ? 'X' : 'O'}`; 
 
   const handleClick = (index) => {
     if (squares[index] || winner) {
-      return;
+      return; // if winner is found then return 
     }
     const newSquares = squares.slice();
+    console.log(newSquares);
     newSquares[index] = isXNext ? 'X' : 'O';
     setSquares(newSquares);
     setIsXNext(!isXNext);
   };
 
   const handleReset = () => {
-    setSquares(initialSquares);
-    setIsXNext(true);
+    setSquares(initialSquares); // setting the text of squares to null 
+    setIsXNext(true); // and set x as next value , first turn is X
   };
 
   const renderSquare = (i) => {
-    return <Square key={i} value={squares[i]} onClick={() => handleClick(i)} />;
-  };
+    return <Square key={i} value={squares[i]} onClick={() => handleClick(i)} />; // create a click function that will put x or o on the square 
+  }; // basically this will change the text of a square to x or 0 based on turn
 
   return (
+    // used react-bootstrap and tachyons css for better responsive design s
     <Container className=" ma3 tc">
       <Fade>
         <h2 className="mb4 b navy">{status}</h2>
