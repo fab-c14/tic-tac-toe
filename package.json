@@ -2,7 +2,7 @@
   "name": "tictactoe",
   "private": true,
   "version": "0.0.0",
-  "homepage":".",
+  "homepage":"./",
   "type": "module",
   "scripts": {
 
